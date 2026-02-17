@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, Follow
 from django.contrib.auth.password_validation import validate_password
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -24,3 +24,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'email', 'username', 'bio', 'date_joined')
         read_only_fields = ('email', 'date_joined')
+
+class FollowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Follow
+        fields = ['id', 'follower', 'following', 'created_at']
+        read_only_fields = ['follower']
